@@ -4,7 +4,8 @@
   <li class="listItem">
     <div class="item-info1">
       <label class="custom-checkbox">
-        <input type="checkbox" name="item" class="item" id="item_{{ forloop.counter }}" onclick="check()" />
+        <input type="checkbox" name="item" class="item" id="item_{{ forloop.counter }}"
+          onclick="atualizarStatus({{ item.id }}, this.checked)" {% if item.concluida %}checked{% endif %} />
         <span class="checkmark"></span>
       </label>
       <div class="info">
