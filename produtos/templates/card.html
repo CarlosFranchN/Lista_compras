@@ -1,0 +1,41 @@
+{% load static %}
+<ul name="myList" class="myList" id="myList">
+  {% for item in produtos %}
+  <li class="listItem">
+    <div class="item-info1">
+      <label class="custom-checkbox">
+        <input type="checkbox" name="item" class="item" id="item_{{ forloop.counter }}" onclick="check()" />
+        <span class="checkmark"></span>
+      </label>
+      <div class="info">
+        <label for="item_{{ forloop.counter }}">{{ item.nome }}</label>
+        <div class="label-quantidade">
+          {{ item.quantidade }} {{ item.tipo }}
+        </div>
+      </div>
+    </div>
+    <div class="item-info2">
+      <div class="badge {{ item.categoria }}">
+        {% if item.categoria == "FRU" %}
+        <img src="{% static 'img/icon/Type=fruit.svg' %}" alt="" />
+
+        {% elif item.categoria == "CAR" %}
+
+        <img src="{% static 'img/icon/Type=meat.svg' %}" alt="" />
+
+        {% elif item.categoria == "PAD" %}
+
+        <img src="{% static 'img/icon/Type=bakery.svg' %}" alt="" />
+        {% elif item.categoria == "VEG" %}
+        <img src="{% static 'img/icon/Type=vegetable.svg' %}" alt="" />
+
+        {% elif item.categoria == "BEB" %}
+        <img src="{% static 'img/icon/Type=drink.svg' %}" alt="" />
+
+        {% else %} {% endif %}
+      </div>
+      <button id="btn_delete" onclick="task_delete(this)">⋮</button>
+    </div>
+  </li>
+  {% endfor %}
+</ul>

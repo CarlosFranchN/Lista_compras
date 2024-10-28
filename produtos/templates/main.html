@@ -1,0 +1,21 @@
+{% extends "master.html" %} {% load static %}{% block content %}
+<section class="titulo">
+  <h1>
+    Lista de Compras
+  </h1>
+</section>
+
+<section class="form">
+    {% block myForm %}
+      {% include 'form.html' %}
+    {% endblock  %}
+</section>
+
+
+
+<section class="card_list">
+  {% block card %}
+  {% include 'card.html' %}
+  {% endblock %}
+</section>
+{% endblock %}

@@ -1,0 +1,70 @@
+.titulo {
+    text-align: start;
+    font-size: 24px;
+    width: 100%;
+
+    padding-left: 0;
+    padding-bottom: 1rem;
+
+}
+
+.card_list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    width: 100%;
+    /* background-color: #0C0C0D; */
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    width: 45rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: .8rem;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input input,
+.form-input select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.quantidade-unidade {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.quantidade-unidade input {
+    max-width: 60px;
+}
+
+.quantidade-unidade select {
+    max-width: 80px;
+}
+
+.btn-adicionar {
+    background-color: #6A1B9A;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-adicionar img {
+    width: 24px;
+    height: 24px;
+}

@@ -1,0 +1,67 @@
+{% load static %}
+<form method="POST" action="{% url 'produtos' %}">
+    {% csrf_token %}
+    <div class="form-row">
+        <!-- Campo de Item -->
+        <div class="form-input item">
+            <label for="nome">Item</label>
+            <input type="text" id="nome" name="nome" />
+        </div>
+
+        <!-- Campo de Quantidade -->
+        <div class="form-input quantidade">
+            <label for="quantidade">Quantidade</label>
+            <div class="quantidade-unidade">
+                <input type="number" id="quantidade" name="quantidade" value="1" min="1" />
+                <select id="unidade" name="tipo">
+                    {% if options %}
+                    {% for tipo in options.tipos %}
+
+                    <option value="{{ tipo.0 }}">
+
+                        {{ tipo.0 }}
+                    </option>
+
+                    {% endfor %}
+                    {% else %}
+                    <option value="">Nenhuma unidade disponível</option>
+                    {% endif %}
+
+                    <!-- Outras unidades -->
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo de Categoria -->
+        <div class="form-input categoria">
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria">
+                {% if options and icones %}
+                {% for categoria in options.categorias %}
+                {% for tupla in icones %}
+                {% if categoria.0 == tupla.0 %}
+                <option value="{{ categoria.0 }}">
+
+                    {{ categoria.1 }}
+
+
+                </option>
+                {% endif %}
+                {% endfor %}
+
+                {% endfor %}
+                {% else %}
+                <option value="">Nenhuma unidade disponível</option>
+                {% endif %}
+                <!-- Outras categorias -->
+            </select>
+        </div>
+
+        <!-- Botão de Adicionar -->
+        <div class="form-input">
+            <button type="submit" class="btn-adicionar">
+                
+            </button>
+        </div>
+    </div>
+</form>
