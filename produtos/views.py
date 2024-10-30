@@ -1,7 +1,7 @@
 # Django views are Python functions that take http requests and return http response, like HTML documents.
 # Create your views here.
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from .form import ProdutoForm
 from .models import Produto
@@ -57,6 +57,7 @@ def produtos(request):
     else:
         # Se o método não for POST, exibir o formulário vazio
         form = ProdutoForm()
+
     produtos = BuscarProdutos()  # Busca todos os produtos no banco de dados
     options = BuscarOptions()
     icones = BuscarIcones()
@@ -72,3 +73,28 @@ def produtos(request):
 def card(request):
     produtos = Produto.objects.all()  # Busca todos os produtos no banco de dados
     return render(request, "card.html", {"produtos": produtos})
+
+
+@csrf_exempt
+def atualizarProduto(request):
+    if request.method == "POST":
+        produto_id = request.POST.get(
+            "produto_id"
+        )  # Certifique-se de que o campo id no formulário é 'produto_id'
+        concluida = (
+            request.POST.get("concluida") == "true"
+        )  # Verifique se o valor está sendo passado como string 'true'
+
+        try:
+            produto = Produto.objects.get(id=produto_id)
+            produto.concluida = concluida
+            produto.save()
+            return JsonResponse({"status": "success"})
+        except Produto.DoesNotExist:
+            return JsonResponse(
+                {"status": "error", "message": "Produto não encontrado"}, status=404
+            )
+    else:
+        return JsonResponse(
+            {"status": "error", "message": "Método inválido"}, status=400
+        )
