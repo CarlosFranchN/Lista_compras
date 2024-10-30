@@ -1,6 +1,6 @@
 # Django views are Python functions that take http requests and return http response, like HTML documents.
 # Create your views here.
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from .form import ProdutoForm
@@ -98,3 +98,10 @@ def atualizarProduto(request):
         return JsonResponse(
             {"status": "error", "message": "Método inválido"}, status=400
         )
+
+def deletar_item(request, item_id):
+    item = get_object_or_404(Produto, id=item_id)
+    if request.method == 'POST':
+        item.delete()
+        return redirect(produtos)  # Redirecionar para onde você quer
+    return redirect(produtos)  # Se não for um POST, redirecionar para a lista

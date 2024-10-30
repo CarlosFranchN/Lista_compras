@@ -155,3 +155,10 @@
     text-decoration: line-through;
     opacity: 0.5; /* Diminui o brilho da caixa */
   }
+
+.form_delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

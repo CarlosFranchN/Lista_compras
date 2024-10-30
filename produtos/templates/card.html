@@ -5,7 +5,7 @@
     <div class="item-info1">
       <label class="custom-checkbox">
         <input type="checkbox" name="item" class="checkbox_item" id="item_{{ forloop.counter }}"
-          onclick="atualizarStatus({{ item.id }}, this.checked)" {% if item.concluida %}checked{% endif %} />
+          onclick="check();atualizarStatus({{ item.id }}, this.checked)" {% if item.concluida %}checked{% endif %} />
         <span class="checkmark"></span>
       </label>
       <div class="info">
@@ -35,7 +35,11 @@
 
         {% else %} {% endif %}
       </div>
-      <button id="btn_delete" onclick="task_delete(this)">⋮</button>
+      <form method="POST" action="{% url 'deletar_item' item.id %}" class="form_delete" >
+        {% csrf_token %}
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" id="btn_delete" onclick="return confirm('Você tem certeza que deseja deletar este item?');">⋮</button>
+    </form>
     </div>
   </li>
   {% endfor %}
